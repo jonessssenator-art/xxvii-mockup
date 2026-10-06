@@ -189,9 +189,9 @@ p,li{text-wrap:pretty}
 .quote.sw > *{opacity:0;transform:translateY(10px)}
 
 /* ---------- about ---------- */
-.about .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,6vw,100px);align-items:center}
-.photo{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:4/5;background:var(--card)}
-.photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;will-change:transform}
+.about .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,6vw,100px);align-items:stretch}
+.photo{position:relative;border-radius:26px;overflow:hidden;min-height:480px;background:var(--card)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;will-change:transform}
 .photo::after{content:"XXVII";position:absolute;left:18px;bottom:14px;font-family:var(--f-display);font-size:40px;color:var(--milk);mix-blend-mode:difference}
 .about ul{margin-top:34px;list-style:none;display:grid;gap:14px}
 .about li{display:flex;gap:14px;color:#cfc9c0}
@@ -252,6 +252,7 @@ form small{color:var(--dim);font-size:12px}
   .stack{display:none}
   .bento .a,.bento .b,.bento .c,.bento .d{grid-column:1/-1;min-height:0}
   .about .grid,.cgrid,.faqgrid{grid-template-columns:1fr}
+  .photo{min-height:0;aspect-ratio:4/5}
   .head{display:block}
   .head .sub{margin-top:20px;padding:0}
   .faqgrid .head{position:static;margin-bottom:var(--head-gap)}

@@ -24,7 +24,7 @@ h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
 .about h2{font-size:clamp(30px,3.7vw,56px);max-width:19ch}
 .lead{max-width:52ch;color:#cfc9c0;margin-top:20px}
 .photo{position:relative;border-radius:26px;overflow:hidden;background:var(--card)}
-.photo img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .tags span{padding:7px 14px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--muted)}
 .cta{margin-top:30px}
@@ -48,8 +48,8 @@ h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
 .team img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}
 .teamcap{font-size:14px;color:var(--muted)}
 /* A */
-.vA .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,6vw,96px);align-items:center}
-.vA .photo{aspect-ratio:4/5}
+.vA .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,6vw,96px);align-items:stretch}
+.vA .photo{min-height:520px}
 .vA .cap{position:absolute;left:16px;right:16px;bottom:16px;padding:16px 18px;border-radius:18px;background:rgba(23,23,23,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12)}
 .vA .cap b{display:block;font-size:20px;font-weight:600}.vA .cap span{font-size:14px;color:var(--muted)}
 .vA .items{grid-template-columns:1fr 1fr;margin-top:34px;gap:26px 28px}
@@ -97,7 +97,7 @@ h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
 .vD .foot{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-top:34px}
 .vD .foot span{color:var(--muted)}
 @media (max-width:900px){
- .vA .grid,.vD .top{grid-template-columns:1fr}.vA .items{grid-template-columns:1fr}
+ .vA .grid,.vD .top{grid-template-columns:1fr}.vA .items{grid-template-columns:1fr}.vA .photo{min-height:0;aspect-ratio:4/5}
  .vB .items,.vD .items{grid-template-columns:1fr}
  .vC .bento{grid-template-columns:1fr 1fr}.vC .t-photo{grid-column:1/-1;grid-row:auto;aspect-ratio:4/5;min-height:0}.vC .t-wide,.vC .t-cta{grid-column:1/-1}
  .vB .thumbs{display:flex;gap:10px;overflow-x:auto;margin-top:26px;scroll-snap-type:x mandatory}.vB .thumbs img{flex:0 0 78%;height:150px;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line);scroll-snap-align:start}
