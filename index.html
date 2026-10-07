@@ -37,7 +37,6 @@ h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.02;letter-sp
 @keyframes draw{to{stroke-dashoffset:0}}
 
 /* ---------- progress + nav ---------- */
-.progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--wine-hi);transform-origin:left;transform:scaleX(0);z-index:60}
 .nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:6px;padding:6px 6px 6px 18px;border:1px solid var(--line);border-radius:999px;background:rgba(23,23,23,.62);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);transition:transform .5s var(--ease)}
 .nav.hide{transform:translate(-50%,-140%)}
 .logo{font-family:var(--f-display);font-size:22px;letter-spacing:.02em;margin-right:14px}
@@ -350,7 +349,8 @@ svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stro
 .agree input:checked{background:var(--wine-hi);border-color:var(--wine-hi)}
 .agree input:checked::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
 .agree input:focus-visible{outline:2px solid var(--wine-soft);outline-offset:2px}
-.agree a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(216,163,151,.6)}
+.agree{line-height:1.6}
+.agree a{padding:.5em 0;color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(216,163,151,.6)}
 .agree a:hover{color:var(--wine-soft)}
 form.shake .agree input:not(:checked){border-color:var(--wine-hi);animation:shk .4s}
 @keyframes shk{20%,60%{transform:translateX(-4px)}40%,80%{transform:translateX(4px)}}
@@ -370,6 +370,53 @@ form.shake .agree input:not(:checked){border-color:var(--wine-hi);animation:shk 
 .fup:hover .circ{transform:translateY(-4px);background:rgba(255,255,255,.08)}
 .fbase{display:flex;justify-content:space-between;gap:16px 28px;flex-wrap:wrap;padding:20px 0 28px;border-top:1px solid var(--line);font-size:14px;color:var(--dim)}
 .fbase a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.2)}
+
+
+/* ---------- адаптивность: телефоны, планшеты, широкие экраны ---------- */
+/* плавающая панель: только на телефонах в портретной ориентации, компактная */
+@media (max-width:900px){
+  .mcta{left:12px;right:12px;gap:8px}
+  .mcta .btn{padding:13px 12px;font-size:15px;white-space:nowrap;min-height:48px}
+}
+@media (min-width:601px) and (max-width:900px){.mcta{left:50%;right:auto;width:min(440px,calc(100% - 24px));transform:translate(-50%,160%)}.mcta.show{transform:translate(-50%,0)}}
+@media (max-height:520px){.mcta{display:none!important}}
+/* узкие телефоны */
+@media (max-width:380px){
+  .wrap{width:min(1240px,100% - 32px)}
+  .about h2{font-size:28px}
+  .head h2{font-size:clamp(30px,9vw,40px)}
+  .hero .facts .fact b{font-size:26px}
+  .hero .row .btn{padding:15px 22px}
+  .bento article{padding:22px}
+}
+/* планшеты: фото «Обо мне» не растягивается во всю высоту экрана */
+@media (min-width:601px) and (max-width:900px){
+  .about .photo{aspect-ratio:4/3;max-height:560px}
+  .about .photo img{object-position:center 18%}
+}
+/* горизонтальный телефон: первый экран и закреплённый экран без обрезки */
+@media (max-height:520px) and (orientation:landscape){
+  .hero{min-height:0;padding-top:96px}
+  .hero h1{font-size:clamp(32px,6vw,52px)}
+  .pin{height:300vh}
+  .pin .stick{padding-top:56px}
+  .nav{top:8px}
+}
+/* сенсорные экраны: крупные зоны нажатия (не меньше 44 пикселей) */
+@media (pointer:coarse){
+  .logo,.flogo{display:inline-flex;align-items:center;min-height:44px}
+  .go{display:inline-flex;align-items:center;min-height:44px}
+  .fnav a,.fbase a{display:inline-flex;align-items:center;min-height:44px}
+  .filters button{min-height:44px;padding-inline:18px}
+  .cs-bar button,.nav .cta{min-height:44px}
+  .fup,.dk{min-height:44px}
+}
+/* большие мониторы: ничего не растягивается без меры */
+@media (min-width:1700px){
+  .wrap{width:min(1360px,100% - 80px)}
+  html{font-size:106%}
+}
+@media (min-width:2200px){html{font-size:118%}.wrap{width:min(1560px,100% - 120px)}}
 
 /* ---------- case dialog ---------- */
 .case{border:0;padding:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;background:var(--bg);color:var(--ink);overflow:hidden}
@@ -410,7 +457,6 @@ form.shake .agree input:not(:checked){border-color:var(--wine-hi);animation:shk 
 <div class="loader" id="loader" aria-hidden="true">
   <svg viewBox="0 0 32 32"><path d="M7 6.5 13 13.5M13 6.5 7 13.5M19 6.5 25 13.5M25 6.5 19 13.5"/><path d="M7 19 10.5 26 14 19M19 19V26M25 19V26"/></svg>
 </div>
-<div class="progress" id="progress"></div>
 
 <header class="nav" id="nav">
   <a class="logo" href="#top" aria-label="XXVII — наверх">xxvii<sup>°</sup></a>
@@ -614,7 +660,7 @@ $$('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%4)*70+'ms'; io.obser
 
 
 /* nav: pill, hide-on-scroll, active, progress */
-const links=$$('#links a'), pill=$('#pill'), nav=$('#nav'), prog=$('#progress'), mcta=$('#mcta');
+const links=$$('#links a'), pill=$('#pill'), nav=$('#nav'), mcta=$('#mcta');
 function movePill(a){ if(!a){ pill.style.opacity=0; return;} pill.style.opacity=1; pill.style.left=a.offsetLeft+'px'; pill.style.width=a.offsetWidth+'px'; }
 links.forEach(a=>{ a.addEventListener('mouseenter',()=>movePill(a)); });
 $('#links').addEventListener('mouseleave',()=>movePill($('#links a.on')));
@@ -622,7 +668,6 @@ const secs=links.map(a=>$(a.getAttribute('href')));
 let lastY=0;
 function onScroll(){
   const y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
-  prog.style.transform=`scaleX(${h?y/h:0})`;
   nav.classList.toggle('hide', y>lastY && y>400); lastY=y;
   let cur=null; secs.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top<innerHeight*.4) cur=links[i]; });
   links.forEach(a=>a.classList.toggle('on',a===cur)); movePill(cur);
