@@ -156,5 +156,8 @@ function footer(){
  w.innerHTML=h;
 }
 function bind(id,key,fn){$('#'+id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[key]=b.dataset.v;$$('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));fn()})}
+const qp=new URLSearchParams(location.search);
+if(qp.get('c')){st.c=qp.get('c');$$('#gC button').forEach(b=>b.classList.toggle('on',b.dataset.v===st.c))}
+if(qp.get('f')){st.f=qp.get('f');$$('#gF button').forEach(b=>b.classList.toggle('on',b.dataset.v===st.f))}
 bind('gC','c',contacts);bind('gF','f',footer);contacts();footer();
 </script></body></html>
