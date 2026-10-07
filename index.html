@@ -179,7 +179,7 @@ p,li{text-wrap:pretty}
 .dock button{width:64px;height:64px;margin-right:-10px;border-radius:50%;border:3px solid var(--bg2);background:linear-gradient(135deg,#783e38,#3b1a17);font-family:var(--f-display);font-size:22px;color:var(--milk);transition:transform .45s var(--ease),margin .45s var(--ease)}
 .dock button:hover,.dock button.on{transform:translateY(-10px) scale(1.18);z-index:2;margin-inline:6px 6px}
 .dock button.on{outline:2px solid var(--wine-soft)}
-.quote{min-height:210px;padding:40px;border-radius:24px;border:1px dashed rgba(216,163,151,.45);background:rgba(120,14,25,.08)}
+.quote{min-height:210px;padding:40px;border-radius:24px;border:1px solid var(--line);background:var(--card)}
 .quote q{max-width:30ch}
 .quote q{display:block;font-family:var(--f-display);font-size:clamp(24px,2.8vw,38px);line-height:1.15;quotes:none}
 .quote .who{margin-top:20px;font-size:14px;color:var(--muted)}
@@ -764,11 +764,26 @@ if(reduce){ document.head.insertAdjacentHTML('beforeend','<style>.rl .col{transi
 $$('[data-case]').forEach(a=>a.addEventListener('click',e=>{ e.preventDefault(); const k=CASES.findIndex(c=>c.n===a.dataset.case); if(k>=0) openCase(k,a); }));
 
 /* testimonial dock (заглушки) */
-const REV=[{a:'А',n:'Имя клиента 1',r:'Компания · сфера'},{a:'Б',n:'Имя клиента 2',r:'Компания · сфера'},{a:'В',n:'Имя клиента 3',r:'Компания · сфера'}];
-const dock=$('#dock'), quote=$('#quote');
-dock.innerHTML=REV.map((x,i)=>`<button role="tab" aria-label="${x.n}" class="${i?'':'on'}" data-i="${i}">${x.a}</button>`).join('');
-function show(i){ quote.classList.add('sw'); setTimeout(()=>{ const x=REV[i]; quote.innerHTML=`<q>Здесь будет живая цитата клиента о том, что изменилось после запуска сайта.</q><div class="who">${x.n} · ${x.r}</div>`; quote.classList.remove('sw'); },260); $$('#dock button').forEach((b,k)=>b.classList.toggle('on',k===i)); }
-dock.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b) show(+b.dataset.i); }); show(0);
+/* ОТЗЫВЫ. Пока список пустой, блок на сайте скрыт.
+   Чтобы показать блок, добавьте отзыв в список, например:
+   {text:'Текст отзыва клиента.', name:'Имя Фамилия', role:'Компания · сфера'}
+   Аватарка (буква) берётся из имени автоматически. Можно добавить сколько угодно отзывов. */
+const REVIEWS=[];
+(function(){
+  const sec=$('#proof'); if(!sec) return;
+  if(!REVIEWS.length){ sec.hidden=true; sec.style.display='none'; return; }
+  const dock=$('#dock'), quote=$('#quote'); let cur=0;
+  const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  dock.hidden=REVIEWS.length<2;
+  dock.innerHTML=REVIEWS.map((x,i)=>`<button type="button" role="tab" aria-label="${esc(x.name)}" class="${i?'':'on'}" data-i="${i}">${esc((x.name||'?').trim().charAt(0).toUpperCase())}</button>`).join('');
+  function show(i,instant){
+    const draw=()=>{ const x=REVIEWS[i]; quote.innerHTML=`<q>${esc(x.text)}</q><div class="who">${esc(x.name)}${x.role?' · '+esc(x.role):''}</div>`; quote.classList.remove('sw'); };
+    cur=i; [...dock.children].forEach((b,k)=>b.classList.toggle('on',k===i));
+    if(instant){ draw(); return; } quote.classList.add('sw'); setTimeout(draw,260);
+  }
+  dock.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b) show(+b.dataset.i); });
+  show(0,true);
+})();
 
 /* form -> telegram */
 $('#form').addEventListener('submit',e=>{ e.preventDefault(); const f=new FormData(e.target); const m=`Здравствуйте! Меня зовут ${f.get('n')}.\nНужно: ${f.get('s')}.\n${f.get('t')||''}`; open('https://t.me/xxviiexe?text='+encodeURIComponent(m),'_blank','noopener'); });

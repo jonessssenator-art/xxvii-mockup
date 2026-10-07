@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XXVII — варианты контактов и подвала</title><meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{--bg:#171717;--bg2:#1e1b1a;--card:#211a18;--ink:#f2efe9;--muted:#9a948c;--dim:#6d6a65;--milk:#e8d9c9;--wine:#780e19;--wine-hi:#a3202f;--wine-soft:#d8a397;--line:rgba(255,255,255,.1);--ease:cubic-bezier(.22,1,.36,1);--f:'Golos Text',system-ui,-apple-system,'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h2,h3{font-weight:600;letter-spacing:-.035em;line-height:1.05;text-wrap:balance}p{text-wrap:pretty}
+.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+.bar{position:sticky;top:0;z-index:60;background:rgba(14,14,14,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;padding:12px 0}
+.grp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.grp>span{font-size:12px;color:var(--dim);margin-right:4px}
+.grp button{padding:7px 13px;border-radius:999px;border:1px solid var(--line);font-size:13px;color:var(--muted);transition:.25s}
+.grp button.on{background:var(--milk);color:#2b2421;border-color:var(--milk)}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+/* контакты */
+.contact{position:relative;background:var(--wine);overflow:hidden;isolation:isolate;padding:clamp(80px,9vw,130px) 0 clamp(100px,11vw,150px)}
+.contact::before{content:"XXVII";position:absolute;right:-2%;bottom:-8%;font-size:clamp(200px,34vw,520px);font-weight:600;line-height:.8;color:transparent;-webkit-text-stroke:1.5px rgba(232,217,201,.18);z-index:-1;pointer-events:none}
+.contact h2{font-size:clamp(46px,7.4vw,112px);max-width:10ch}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);margin-top:clamp(40px,5vw,64px);align-items:start}
+.cgrid>div>p{color:#f1cfca;max-width:40ch}
+.cw{margin-top:28px}
+/* C1 */
+.c1 .cl{display:grid;gap:12px}
+.c1 .cl a{display:flex;align-items:center;gap:14px;padding:18px 22px;border-radius:16px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.12);transition:background .3s,transform .45s var(--ease)}
+.c1 .cl a:hover{background:rgba(0,0,0,.35);transform:translateX(6px)}
+.c1 .cl a span{margin-left:auto;font-size:14px;color:#e9bcb4}
+/* C2 */
+.c2 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.c2 .tile{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:34px;min-height:150px;padding:20px;border-radius:20px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.12);transition:transform .5s var(--ease),border-color .3s}
+.c2 .tile::after{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.14),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.c2 .tile:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.3)}
+.c2 .tile:hover::after{opacity:1}
+.c2 .tile b{display:block;font-size:18px;font-weight:600}
+.c2 .tile span{font-size:13px;color:#e9bcb4;word-break:break-all}
+.c2 .tile .ar{position:absolute;right:16px;top:16px;opacity:.55;transition:transform .4s var(--ease),opacity .3s}
+.c2 .tile:hover .ar{transform:translate(3px,-3px);opacity:1}
+/* C3: dock */
+.c3 .dock{display:flex;align-items:flex-end;gap:10px;height:96px}
+.c3 .dk{position:relative;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.18);transition:transform .45s var(--ease),background .3s;transform-origin:bottom center}
+.c3 .dk svg.i{width:26px;height:26px}
+.c3 .dk:hover,.c3 .dk.near{transform:scale(1.2)}
+.c3 .dk:hover{background:#fff;color:var(--wine)}
+.c3 .tip{margin-top:14px;min-height:56px}
+.c3 .tip b{display:block;font-size:20px;font-weight:600}
+.c3 .tip span{color:#f1cfca;font-size:15px}
+/* C4: переключатель канала */
+.c4 .seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:5px;border-radius:999px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.14)}
+.c4 .seg button{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;font-size:15px;color:#f1cfca;transition:.3s var(--ease)}
+.c4 .seg button svg.i{width:18px;height:18px}
+.c4 .seg button.on{background:#fff;color:var(--wine)}
+.c4 .go{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:16px;padding:22px 26px;border-radius:22px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.14);transition:background .3s}
+.c4 .go:hover{background:rgba(0,0,0,.4)}
+.c4 .go b{display:block;font-size:clamp(22px,2.4vw,32px);font-weight:600;letter-spacing:-.02em}
+.c4 .go span{font-size:14px;color:#f1cfca}
+.c4 .go .circ{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;color:var(--wine);flex:0 0 auto}
+form{display:grid;gap:14px;padding:30px;border-radius:24px;background:rgba(23,23,23,.88)}
+form label{font-size:13px;color:var(--muted)}
+form input,form textarea,form select{width:100%;margin-top:6px;padding:15px 16px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);font:inherit;font-size:16px}
+form textarea{min-height:90px;resize:vertical}
+form .btn{display:flex;justify-content:center;padding:17px 28px;border-radius:999px;background:var(--wine);color:#fff;font-weight:500}
+/* подвал */
+.foot{position:relative;margin-top:-44px;border-radius:44px 44px 0 0;background:var(--bg);box-shadow:0 -26px 50px -22px rgba(0,0,0,.6);color:var(--muted);font-size:15px;overflow:hidden}
+.foot a{transition:color .25s}.foot a:hover{color:var(--ink)}
+.logo{font-size:26px;font-weight:600;letter-spacing:-.02em;color:var(--ink)}.logo sup{font-size:11px;color:var(--wine-soft)}
+.up{display:inline-flex;align-items:center;gap:10px}
+.up .circ{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);color:var(--ink);transition:transform .45s var(--ease),background .3s}
+.up:hover .circ{transform:translateY(-4px);background:rgba(255,255,255,.08)}
+.soc{display:flex;gap:10px}
+.soc a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);color:var(--ink);transition:transform .45s var(--ease),background .3s,border-color .3s}
+.soc a:hover{transform:translateY(-4px);background:var(--wine);border-color:var(--wine)}
+/* F1 */
+.f1 .in{padding:clamp(60px,7vw,90px) 0 0}
+.f1 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:30px;flex-wrap:wrap}
+.f1 .nav{display:flex;gap:28px;flex-wrap:wrap;font-size:16px}
+.f1 .word{margin-top:clamp(30px,5vw,60px);font-size:clamp(120px,27vw,420px);font-weight:700;letter-spacing:-.06em;line-height:.78;color:transparent;-webkit-text-stroke:1.5px rgba(232,217,201,.28);white-space:nowrap;transform:translateY(8%);user-select:none;transition:-webkit-text-stroke-color .5s}
+.f1:hover .word{-webkit-text-stroke-color:rgba(216,163,151,.7)}
+.f1 .base{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:22px 0 26px;border-top:1px solid var(--line);position:relative;z-index:2;background:var(--bg);margin-top:-1px}
+/* F2 */
+.f2 .in{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:clamp(24px,4vw,64px);padding:clamp(60px,7vw,90px) 0 40px}
+.f2 .in p{margin-top:14px;max-width:30ch}
+.f2 h4{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:14px}
+.f2 ul{list-style:none;display:grid;gap:10px}
+.f2 .base{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:22px 0 26px;border-top:1px solid var(--line)}
+/* F3 */
+.f3 .in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:clamp(48px,6vw,70px) 0 clamp(36px,4vw,50px)}
+.f3 .nav{display:flex;gap:26px;flex-wrap:wrap}
+/* F4 */
+.f4 .big{padding:clamp(70px,8vw,110px) 0 clamp(40px,5vw,60px)}
+.f4 .big p{margin-bottom:14px}
+.f4 .cta{display:inline-flex;align-items:center;gap:clamp(14px,2vw,28px);font-size:clamp(40px,8vw,120px);font-weight:600;letter-spacing:-.045em;line-height:1;color:var(--ink)}
+.f4 .cta span{position:relative}
+.f4 .cta span::after{content:"";position:absolute;left:0;right:0;bottom:-.06em;height:.07em;background:var(--wine-hi);transform-origin:left;transform:scaleX(.18);transition:transform .7s var(--ease)}
+.f4 .cta:hover span::after{transform:scaleX(1)}
+.f4 .cta .circ{display:grid;place-items:center;width:clamp(48px,7vw,96px);height:clamp(48px,7vw,96px);border-radius:50%;background:var(--wine);color:#fff;transition:transform .5s var(--ease)}
+.f4 .cta .circ svg{width:42%;height:42%}
+.f4 .cta:hover .circ{transform:rotate(45deg)}
+.f4 .base{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:24px 0 28px;border-top:1px solid var(--line)}
+.f4 .base .nav{display:flex;gap:24px;flex-wrap:wrap}
+@media (max-width:900px){
+ .cgrid{grid-template-columns:1fr}.f2 .in{grid-template-columns:1fr 1fr}.foot{margin-top:-28px;border-radius:28px 28px 0 0}
+ .c2 .tiles{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){.f2 .in{grid-template-columns:1fr}.c2 .tiles{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important}}
+</style></head>
+<body>
+<div class="bar"><div class="wrap">
+ <div class="grp" id="gC"><span>Контакты</span><button data-v="1" class="on">1 · Список</button><button data-v="2">2 · Плитки</button><button data-v="3">3 · Иконки-док</button><button data-v="4">4 · Выбор способа</button></div>
+ <div class="grp" id="gF"><span>Подвал</span><button data-v="1" class="on">1 · Крупный знак</button><button data-v="2">2 · Колонки</button><button data-v="3">3 · Тонкая строка</button><button data-v="4">4 · Большая ссылка</button><button data-v="0">Как сейчас</button></div>
+</div></div>
+<section class="contact" id="contact"><div class="wrap">
+ <h2>Расскажите о проекте</h2>
+ <div class="cgrid"><div><p>Напишите, что хотите сделать. Если есть текущий сайт или пример — приложите ссылку. Отвечаю лично.</p><div class="cw" id="cw"></div></div>
+ <form onsubmit="return false"><label>Как к вам обращаться<input placeholder="Имя"></label><label>Что нужно сделать<select><option>Лендинг</option><option>Сайт компании</option><option>Презентация</option><option>Комплексная упаковка</option></select></label><label>Коротко о задаче<textarea placeholder="Чем занимается бизнес и что хотите получить"></textarea></label><a class="btn" href="#">Отправить в Telegram →</a></form></div>
+</div></section>
+<footer class="foot" id="foot"><div class="wrap" id="fw"></div></footer>
+<script>
+const IC={"send": "<path d=\"M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z\"/><path d=\"m21.854 2.147-10.94 10.939\"/>", "phone": "<path d=\"M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384\"/>", "mail": "<path d=\"m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7\"/><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/>", "arrow-up": "<path d=\"m5 12 7-7 7 7\"/><path d=\"M12 19V5\"/>", "arrow-up-right": "<path d=\"M7 7h10v10\"/><path d=\"M7 17 17 7\"/>", "map-pin": "<path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/>"};
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const ico=n=>'<svg class="i" viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>';
+const INSTA='<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></svg>';
+const CH=[
+ {n:'Telegram',h:'@xxviiexe',u:'https://t.me/xxviiexe',i:ico('send')},
+ {n:'Instagram',h:'@xxvii.exe',u:'https://www.instagram.com/xxvii.exe',i:INSTA},
+ {n:'Телефон',h:'+7 968 866-66-27',u:'tel:+79688666627',i:ico('phone')},
+ {n:'Почта',h:'jonessssenator@yandex.ru',u:'mailto:jonessssenator@yandex.ru',i:ico('mail')}
+];
+const AR=ico('arrow-up-right');
+const st={c:'1',f:'1'};
+function contacts(){
+ const w=$('#cw'); w.className='cw c'+st.c; let h='';
+ if(st.c==='1') h='<div class="cl">'+CH.map(c=>'<a href="'+c.u+'" target="_blank" rel="noreferrer">'+c.i+c.n+'<span>'+c.h+'</span></a>').join('')+'</div>';
+ if(st.c==='2') h='<div class="tiles">'+CH.map(c=>'<a class="tile" href="'+c.u+'" target="_blank" rel="noreferrer"><span class="ar">'+AR+'</span>'+c.i+'<div><b>'+c.n+'</b><span>'+c.h+'</span></div></a>').join('')+'</div>';
+ if(st.c==='3') h='<div class="dock">'+CH.map((c,k)=>'<a class="dk" data-k="'+k+'" href="'+c.u+'" target="_blank" rel="noreferrer" aria-label="'+c.n+'">'+c.i+'</a>').join('')+'</div><div class="tip" id="tip"><b>'+CH[0].n+'</b><span>'+CH[0].h+'</span></div>';
+ if(st.c==='4') h='<div class="seg" role="tablist">'+CH.map((c,k)=>'<button type="button" role="tab" class="'+(k?'':'on')+'" data-k="'+k+'">'+c.i+c.n+'</button>').join('')+'</div><a class="go" id="go" href="'+CH[0].u+'" target="_blank" rel="noreferrer"><div><b>'+CH[0].h+'</b><span>Нажмите, чтобы написать</span></div><span class="circ">'+AR+'</span></a>';
+ w.innerHTML=h;
+ if(st.c==='2') $$('.tile').forEach(t=>t.addEventListener('mousemove',e=>{const r=t.getBoundingClientRect();t.style.setProperty('--mx',(e.clientX-r.left)+'px');t.style.setProperty('--my',(e.clientY-r.top)+'px')}));
+ if(st.c==='3'){const dks=$$('.dk'),tip=$('#tip');dks.forEach((d,k)=>{d.addEventListener('mouseenter',()=>{dks.forEach((x,i)=>x.classList.toggle('near',Math.abs(i-k)===1));tip.innerHTML='<b>'+CH[k].n+'</b><span>'+CH[k].h+'</span>'});d.addEventListener('mouseleave',()=>dks.forEach(x=>x.classList.remove('near')))})}
+ if(st.c==='4'){const bs=$$('.seg button'),go=$('#go');bs.forEach(b=>b.addEventListener('click',()=>{const c=CH[+b.dataset.k];bs.forEach(x=>x.classList.toggle('on',x===b));go.href=c.u;$('b',go).textContent=c.h}))}
+}
+const NAV=[['Услуги','#services'],['Проекты','#work'],['Процесс','#process'],['Вопросы','#faq']];
+const soc='<div class="soc">'+CH.map(c=>'<a href="'+c.u+'" target="_blank" rel="noreferrer" aria-label="'+c.n+'">'+c.i+'</a>').join('')+'</div>';
+const nav=NAV.map(n=>'<a href="'+n[1]+'">'+n[0]+'</a>').join('');
+const up='<a class="up" href="#contact">Наверх<span class="circ">'+ico('arrow-up')+'</span></a>';
+function footer(){
+ const f=$('#foot'),w=$('#fw'); f.className='foot f'+st.f; let h='';
+ if(st.f==='0') {f.className='foot';w.innerHTML='<div style="display:flex;justify-content:space-between;padding:78px 0 34px;gap:20px;flex-wrap:wrap"><span>xxvii° · Лендинги и сайты под ключ · Астрахань</span><a href="#contact">Наверх ↑</a></div>';return}
+ if(st.f==='1') h='<div class="in"><div class="top"><div><span class="logo">xxvii<sup>°</sup></span></div><nav class="nav">'+nav+'</nav>'+soc+'</div><div class="word" aria-hidden="true">xxvii</div></div><div class="base"><span>Лендинги и сайты под ключ · Астрахань</span>'+up+'</div>';
+ if(st.f==='2') h='<div class="in"><div><span class="logo">xxvii<sup>°</sup></span><p>Лендинги и сайты под ключ. Работаю из Астрахани, проекты веду по всей России.</p></div><div><h4>Разделы</h4><ul>'+NAV.map(n=>'<li><a href="'+n[1]+'">'+n[0]+'</a></li>').join('')+'</ul></div><div><h4>Связаться</h4><ul>'+CH.filter(c=>c.n!=='Instagram').map(c=>'<li><a href="'+c.u+'">'+c.h+'</a></li>').join('')+'</ul></div><div><h4>Соцсети</h4><ul><li><a href="'+CH[0].u+'">Telegram</a></li><li><a href="'+CH[1].u+'">Instagram</a></li></ul></div></div><div class="base"><span>xxvii° · Астрахань</span>'+up+'</div>';
+ if(st.f==='3') h='<div class="in"><span class="logo">xxvii<sup>°</sup></span><nav class="nav">'+nav+'</nav>'+soc+up+'</div>';
+ if(st.f==='4') h='<div class="big"><p>Есть задача?</p><a class="cta" href="'+CH[0].u+'" target="_blank" rel="noreferrer"><span>Написать в Telegram</span><i class="circ">'+AR+'</i></a></div><div class="base"><span class="logo" style="font-size:22px">xxvii<sup>°</sup></span><nav class="nav">'+nav+'</nav>'+soc+up+'</div>';
+ w.innerHTML=h;
+}
+function bind(id,key,fn){$('#'+id).addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;st[key]=b.dataset.v;$$('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));fn()})}
+bind('gC','c',contacts);bind('gF','f',footer);contacts();footer();
+</script></body></html>
